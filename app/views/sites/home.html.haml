@@ -1,0 +1,27 @@
+.grid-x
+  .cell.medium-6
+    %h1 Sites#home
+  .cell.medium-6
+    %p Find me in app/views/sites/home.html.haml
+.grid-x
+  .cell
+    %button.button{"data-toggle" => "example-dropdown", :type => "button"} Toggle Dropdown
+    #example-dropdown.dropdown-pane{"data-auto-focus" => "true", "data-dropdown" => ""}
+      Example form in a dropdown.
+      %form
+        .grid-container
+          .grid-x.grid-margin-x
+            .cell.medium-6
+              %label
+                Name
+                %input{:placeholder => "Kirk, James T.", :type => "text"}/
+            .cell.medium-6
+              %label
+                Rank
+                %input{:placeholder => "Captain", :type => "text"}/
+    %button.button{"data-toggle" => "example-dropdown-1", :type => "button"} Hoverable Dropdown
+    #example-dropdown-1.dropdown-pane{"data-dropdown" => "", "data-hover" => "true", "data-hover-pane" => "true"}
+      Just some junk that needs to be said. Or not. Your choice.
+.grid-x
+  .cell
+    = link_to "About", about_path

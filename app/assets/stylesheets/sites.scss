@@ -1,0 +1,9 @@
+#main {
+  @extend .grid-container;
+  .grid-x {
+    @extend .grid-margin-x; /* turn the grid margin x on by default */
+    &.collape-grid-x {
+      @extend .small-margin-collapse;
+    }
+  }
+}

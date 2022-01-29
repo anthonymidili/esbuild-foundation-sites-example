@@ -5,10 +5,14 @@
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
     "esbuild": "^0.14.14",
-    "sass": "^1.49.0"
+    "foundation-sites": "^6.7.4",
+    "jquery": "^3.6.0",
+    "motion-ui": "^2.0.3",
+    "sass": "^1.49.0",
+    "what-input": "^5.2.10"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }
