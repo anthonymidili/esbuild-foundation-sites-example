@@ -1,7 +1,9 @@
+@include foundation-everything;
+
 #main {
-  @extend .grid-container;
+  @include xy-grid-container; /* add the xy-grid-container to main */
   .grid-x {
-    @extend .grid-margin-x; /* turn the grid margin x on by default */
+    @extend .grid-margin-x; /* add grid-margin-x to all grid-x classes */
     &.collape-grid-x {
       @extend .small-margin-collapse;
     }
