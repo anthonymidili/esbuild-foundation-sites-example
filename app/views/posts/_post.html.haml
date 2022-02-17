@@ -1,5 +1,5 @@
 = turbo_frame_tag dom_id(post) do
-  %p.callout
+  .callout
     %b Title:
     %mark= post.title
     \|
@@ -8,6 +8,7 @@
     \|
     %b Published:
     %mark= post.published
+
     = link_to 'Show', post, data: { turbo_frame: "_top" }
     = link_to 'Edit', edit_post_path(post)
     = link_to 'Delete', post, data: { turbo_method: :delete }

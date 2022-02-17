@@ -3,4 +3,4 @@
     %h4 Editing post
 
     = render 'form', post: @post
-    = link_to "Cancel", @post
+    = link_to "Cancel Edit", cancel_post_path(@post), class: "button warning"

@@ -1,5 +1,14 @@
 %p#notice= notice
 
-= render @post
+%h1 Show page
+
+%b Title:
+%mark= @post.title
+\|
+%b Body:
+%mark= @post.body
+\|
+%b Published:
+%mark= @post.published
 
 = link_to 'Posts Listing', posts_path

@@ -23,22 +23,16 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    @posts = Post.all
 
     respond_to do |format|
       if @post.save
-        format.turbo_stream  do
-          render turbo_stream:
-          [
-            turbo_stream.replace("form_new_post", partial: "posts/form", locals: { post: Post.new }),
-            turbo_stream.prepend('posts', partial: "posts/post", locals: { post: @post })
-          ]
-        end
+        # Broadcast from model.
         format.html { redirect_to posts_url, notice: "Post was successfully created." }
         format.json { render :index, status: :created, location: posts_url }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("form_new_post", partial: "posts/form", locals: { post: @post })
+          # Show errors.
+          render turbo_stream: turbo_stream.replace(@post, partial: "posts/form", locals: { post: @post })
         end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -50,11 +44,13 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        # Broadcast from model.
+        format.html { redirect_to posts_url, notice: "Post was successfully updated." }
         format.json { render :index, status: :ok, location: posts_url }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("form_post_#{@post.id}", partial: 'posts/form', locals: { post: @post })
+          # Show errors.
+          render turbo_stream: turbo_stream.replace("form_post_#{@post.id}", partial: "posts/form", locals: { post: @post })
         end
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -65,11 +61,20 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-
+    # Broadcast from model.
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
+      # Not sure why this needs to be here if the model is broadcasting destroy.
+      format.turbo_stream { }
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def cancel
+    # Cancel edits by rendering the posts/post partial.
+    respond_to do |format|
+      format.html { redirect_to posts_url }
+      format.json { render :index, status: :ok, location: posts_url }
     end
   end
 
