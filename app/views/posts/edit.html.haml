@@ -1,0 +1,6 @@
+= turbo_frame_tag dom_id(@post) do
+  .callout
+    %h4 Editing post
+
+    = render 'form', post: @post
+    = link_to "Cancel", @post

@@ -1,0 +1,7 @@
+%h1 New Post
+= turbo_frame_tag "post_form" do
+  .callout= render 'posts/form', post: @post
+
+%h1 Listing posts
+= turbo_frame_tag "posts" do
+  = render @posts
